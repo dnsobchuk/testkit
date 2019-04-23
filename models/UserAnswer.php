@@ -59,7 +59,7 @@ class UserAnswer extends ActiveRecord
      */
     public static function getTestData(Result $result) {
         $dataTest = [];
-        $test = $result->getTest();
+        $test = $result->test;
         /** @var Test $test */
         $testQuestions = $test->getQuestions()->all();
         foreach ($testQuestions as $question){
