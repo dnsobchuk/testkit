@@ -2,42 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use yii\data\Pagination;
+use yii\db\Query;
 
-class SiteController extends Controller
+class SiteController extends BaseController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -61,68 +32,43 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        $user = Yii::$app->user->identity;
+        if($user->TimeOver) return $this->redirect(['site/access-deny']);
+        if($user->can(User::ACCESS_LEVEL_CRUD_USERS))  return $this->redirect(['admin/index']);
+        if($user->can(User::ACCESS_LEVEL_EDIT_TEST))   return $this->redirect(['edit/index']);
+        if($user->can(User::ACCESS_LEVEL_FULL_RESULT)) return $this->redirect(['result/index']);
+        $session = Yii::$app->session;
+        $session->open();
+        $finish = false;
+        $count = $session['countQuestion'];
+        $result = $session['result'];
+        if(isset($_SESSION['result'])){
+            unset($session['result']);
+            $finish = true;
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
+        $session->close();
+        $query = Yii::$app->user->identity->getTests();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' =>  $countQuery->count()]);
+        $models = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $words = ['вопрос', 'вопроса', 'вопросов'];
+        return $this->render('index', [
+            'pages'           => $pages,
+            'models'          => $models,
+            'finish'          => $finish,
+            'count'           => $count,
+            'result'          => $result,
+            'words'           => $words
         ]);
     }
 
     /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
      * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
+    public function actionAccessDeny(){
+        $userName = Yii::$app->user->identity->LOGIN;
+        return $this->render('accessDeny', [
+           'userName' => $userName
+        ]);
     }
 }

@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\User;
+use yii\web\JqueryAsset;
 
 AppAsset::register($this);
 ?>
@@ -55,7 +56,7 @@ AppAsset::register($this);
                 'visible' => !Yii::$app->user->isGuest && Yii::$app->user->identity->can(User::ACCESS_LEVEL_FULL_RESULT)
             ],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Вход', 'url' => ['/auth/login']]
+            ['label' => 'Вход', 'url' => ['/auth/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/auth/logout'], 'post')
@@ -80,7 +81,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-
+<?= $this->registerJsFile("@web/js/test.js",  ['depends' => [JqueryAsset::class]]); ?>
 
 <footer class="footer">
     <div class="container">
@@ -97,3 +98,6 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+
+
+

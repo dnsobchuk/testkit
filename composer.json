@@ -1,23 +1,22 @@
 {
-    "name": "yiisoft/yii2-app-basic",
-    "description": "Yii 2 Basic Project Template",
-    "keywords": ["yii2", "framework", "basic", "project template"],
-    "homepage": "http://www.yiiframework.com/",
+    "name": "lostnazgul/testkit",
+    "description": "Testkit это приложение для тестирования и анкетирования пользователей. Основой приложения является фреймворк Yii2. Полностью готовая к использованию система для создания редактирования тестовой базы, а также управления правами пользователей в административной панели.",
+    "keywords": ["questionary", "test", "testing"],
+    "homepage": "https://github.com/lostnazgul/testkit",
     "type": "project",
-    "license": "BSD-3-Clause",
+    "license": "GPL-3.0",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "issues": "https://github.com/lostnazgul/testkit/issues",
+        "wiki": "https://github.com/lostnazgul/testkit/wiki",
+        "source": "https://github.com/lostnazgul/testkit"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.5.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.1.0"
+        "components/jquery": "*",
+        "kartik-v/yii2-widget-datetimepicker": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
