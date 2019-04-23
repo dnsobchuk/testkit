@@ -113,3 +113,270 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+#generate {
+    margin-bottom: 10px;
+}
+
+
+#resultModal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+.lightbox{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0.6;
+    background: white url('../image/loader.gif') no-repeat center center;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    display: inline-block;
+    text-decoration:none;
+    cursor: pointer;
+    position:relative;
+}
+
+.navbar-inverse .navbar-nav > li > a:after{
+    background-color: #9d9d9d;
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0%;
+    left:50%;
+    position:absolute;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    -webkit-transform:translateX(-50%);
+    -moz-transform:translateX(-50%);
+    transform:translateX(-50%);
+}
+
+.navbar-inverse .navbar-nav > li > a:hover:after, .navbar-inverse .navbar-nav > li > a:focus:after{
+    width: 100%;
+}
+
+.table-black > thead > tr:first-child, .table-black > thead > tr:first-child a {
+    color: #fff;
+    background-color: #373a3c;
+}
+
+thead a:hover {
+    color: #9d9d9d;
+}
+
+.animateLink a{
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    color:#222;
+    display:block;
+    text-decoration: none;
+}
+
+.animateLink a:hover {
+    -webkit-transform: translate(8px,0);
+    -moz-transform: translate(8px,0);
+    -o-transform: translate(8px,0);
+    color: #1FA2E1;
+    text-decoration: none;
+}
+
+span.badge {
+    background-color: #1FA2E1;
+}
+#quest {
+    font-size: larger;
+}
+
+.table > thead > tr > th {
+    text-align: center;
+}
+
+.btn-success,.btn-primary,.btn-danger{
+    margin-bottom: 10px;
+}
+
+#quest-form, #answ-form {
+    display: none;
+}
+
+p{
+    display: inline-block;
+}
+
+.glyphicon-trash{
+    color: #8B0000;
+}
+
+.glyphicon-pencil{
+    color: darkgreen;
+}
+
+.glyphicon-eye-open{
+    color:#337ab7;
+}
+
+#multiple-delete{
+    display: none;
+}
+
+#tool-label{
+    position: relative;
+}
+
+#tool-label:hover{
+    color:darkgrey;
+    position: relative;
+}
+
+tbody tr:hover{
+    color: #337ab7;
+}
+
+#remove-test-area:hover,
+#remove-quest-area:hover,
+#remove-answ-area:hover,
+.glyphicon-plus-sign:hover {
+   transform: scale(1.5);
+}
+
+[tooltip]::before,
+[tooltip]::after {
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    text-transform: none;
+    font-size: .9em;
+}
+
+[tooltip]::before {
+    content: '';
+    z-index: 1001;
+    border: 5px solid transparent;
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    z-index: 1000;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    min-width: 3em;
+    max-width: 21em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: .3ch;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+    background: #333;
+    color: #fff;
+}
+
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+    display: block;
+}
+
+[tooltip='']::before,
+[tooltip='']::after {
+    display: none !important;
+}
+
+
+[tooltip]:not([flow])::before
+{
+    bottom: 100%;
+    border-bottom-width: 0;
+    border-top-color: #333;
+}
+
+
+[tooltip]:not([flow])::after
+{
+    bottom: calc(100% + 5px);
+}
+
+
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after
+ {
+    left: 50%;
+    transform: translate(-50%, -.5em);
+}
+
+@keyframes tooltips-vert {
+    to {
+        opacity: .9;
+        transform: translate(-50%, 0);
+    }
+}
+
+
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after
+{
+    animation:
+            tooltips-vert
+            300ms
+            ease-out
+            forwards;
+}
+
+span.glyphicon-ok {
+    color: green;
+}
+span.glyphicon-remove {
+    color: red;
+}
+
+.labelRadio, .form-check-label {
+    font-weight: normal;
+}
+
+.contentQuestion {
+    font-weight: bold;
+}
+
+.label-success, .label-primary, span.glyphicon-remove, span.glyphicon-ok {
+    float: right;
+}
+
+.scrollup{
+    width:40px;
+    height:40px;
+    opacity:0.3;
+    position:fixed;
+    bottom:100px;
+    right:100px;
+    display:none;
+    text-indent:-9999px;
+    background: url('../image/icon_top.png') no-repeat;
+}
+
+.numberWidth {
+    width: 15%;
+}
+#center {
+    text-align: center;
+}
+
+.glyphicon-lock {
+    color: red;
+}
+
