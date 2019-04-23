@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: denis
- * Date: 10/16/18
- * Time: 12:17 PM
- */
 
 namespace app\controllers;
 
@@ -52,9 +46,9 @@ class ResultController extends BaseController
     public function actionResult($id)
     {
         $result = Result::findOne($id);
-        $user = $result->getUser();
+        $user = $result->user;
         /** @var Test $test */
-        $test = $result->getTest();
+        $test = $result->test;
         $count = $test->getCountQuestions();
         $dataTest = UserAnswer::getTestData($result);
         $answerData = UserAnswer::getUserData($result);
